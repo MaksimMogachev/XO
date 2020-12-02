@@ -8,7 +8,7 @@ import java.awt.*;
 
 public class WinnerController {
 
-    public Figure getWinner(final Field field) {
+    public Figure getWinner(final Field<Figure> field) {
         try {
 
             for (int i = 0; i < 3; i++)
@@ -16,7 +16,7 @@ public class WinnerController {
                     return field.getFigure(new Point(i, 1));
 
             for (int i = 0; i < 3; i++)
-                if (check(field, new Point(0, i), p -> new Point(p.x, p.y + 1)))
+                if (check(field, new Point(0, i), p -> new Point(p.x + 1, p.y)))
                     return field.getFigure(new Point(1, i));
 
             if (check(field, new Point(0, 0), p -> new Point(p.x + 1, p.y + 1)))
@@ -32,7 +32,7 @@ public class WinnerController {
 
     }
 
-    private boolean check(final Field field,final Point currentPoint, final IPointGenerator pointGenerator) {
+    private boolean check(final Field<Figure> field,final Point currentPoint, final IPointGenerator pointGenerator) {
         final Figure currentFigure;
         final Figure nextFigure;
         final Point nextPoint = pointGenerator.next(currentPoint);

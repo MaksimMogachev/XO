@@ -5,35 +5,34 @@ import io.hexlet.xo.model.exceptions.InvalidPointExceptions;
 
 import java.awt.*;
 
-public class Field {
+public class Field<T> {
 
     private final int fieldSize;
 
     private static final int MIN_COORDINATE = 0;
 
-    private final Figure[][] field;
+    private final T[][] field;
 
     public Field(int fieldSize) {
         this.fieldSize = fieldSize;
-        field = new Figure[fieldSize][fieldSize];
+        field = (T[][])new Object[fieldSize][fieldSize];
     }
 
     public int getSize() {
         return fieldSize;
     }
 
-    public Figure getFigure(final Point point) throws InvalidPointExceptions {
+    public T getFigure(final Point point) throws InvalidPointExceptions {
         if (!checkPoint(point)) {
             throw new InvalidPointExceptions();
         }
         return field[point.x][point.y];
     }
 
-    public void setFigure(final Point point, final Figure figure) throws InvalidPointExceptions, AlreadyOccupiedException {
+    public void setFigure(final Point point, final T figure) throws InvalidPointExceptions, AlreadyOccupiedException {
         if (!checkPoint(point)) {
             throw new InvalidPointExceptions();
         }
-
         field[point.x][point.y] = figure;
     }
 
